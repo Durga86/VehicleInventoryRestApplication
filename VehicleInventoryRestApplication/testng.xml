@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="VehicleInventoryTestSuite">
+  <test name="VehicleInventoryUnitTest">
+    <classes>
+      <class name="test.AddVehicleRSTest"/>
+      <class name="test.UpdateVehicleRSTest"/>
+      <class name="test.SearchVehicleByVinRSTest"/>
+      <class name="test.DeleteVehicleRSTest"/>
+      <class name="test.DeleteMostRecentVehicleRSTest"/>
+    </classes>
+  </test>
+</suite>
