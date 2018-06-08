@@ -5,6 +5,7 @@
       <class name="test.AddVehicleRSTest"/>
       <class name="test.UpdateVehicleRSTest"/>
       <class name="test.SearchVehicleByVinRSTest"/>
+      <class name="test.SearchVehicleByTypeRSTest"/>
       <class name="test.DeleteVehicleRSTest"/>
       <class name="test.DeleteMostRecentVehicleRSTest"/>
     </classes>

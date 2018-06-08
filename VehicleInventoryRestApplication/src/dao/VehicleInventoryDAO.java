@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import data.Vehicle;
 
@@ -84,6 +86,52 @@ public class VehicleInventoryDAO {
 		}
 		return searchedVehicle;
 	}
+	
+	/**
+	 * Returns vehicle details based on vehicle's vin number
+	 * @param vin
+	 * 
+	 * @return
+	 */
+	public List<Vehicle> searchVehicleByType(String type)
+	{
+		List<Vehicle> searchedVehicleList = new ArrayList<Vehicle>();
+		try {
+			dbConnection = getDbConnection();
+			stmt = dbConnection.createStatement();
+			ResultSet vehicleResultSet = stmt.executeQuery("select * from vehicle_inventory where type='"+type+"'");
+			if(vehicleResultSet != null)
+			{
+				while (vehicleResultSet.next()) {
+					Vehicle searchedVehicle = new Vehicle();
+					searchedVehicle.setVin(vehicleResultSet.getString("VIN"));
+					searchedVehicle.setType(vehicleResultSet.getString("TYPE")); 
+					searchedVehicle.setMake(vehicleResultSet.getString("MAKE"));
+					searchedVehicle.setModel(vehicleResultSet.getString("MODEL")); 
+					searchedVehicle.setYear(vehicleResultSet.getInt("YEAR"));
+					searchedVehicle.setInventoryAddedDate(vehicleResultSet.getTimestamp("INVENTORY_ADDEDON"));
+					searchedVehicleList.add(searchedVehicle);
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();;
+		}
+		finally
+		{
+	      try{
+	         if(dbConnection!=null)
+	         {
+	        	 dbConnection.close();
+	         }
+	      }catch(SQLException exception){
+	    	  exception.printStackTrace();
+	      }
+		}
+		return searchedVehicleList;
+	}
+
 
 	/** Adds Vehicle into DB
 	 * 
